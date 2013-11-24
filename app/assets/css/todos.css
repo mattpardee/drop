@@ -1,0 +1,181 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    background: #f7f7f7;
+    color: #333333; 
+    overflow: hidden;
+}
+
+header > h1 {
+    margin: 10px 0 0 0;
+    font-size: 22px;
+    font-family: Helvetica;
+    font-weight: bold;
+    height: 54px;
+}
+
+header > h1 > .icon {
+    display: inline-block;
+    width: 25px;
+    margin: 0 10px 4px 0;
+}
+
+#todoapp_sidebar {
+    border-right: 1px solid #dde5e9;
+}
+
+#todoapp {
+    padding: 50px 65px;
+    background: #fff;
+}
+
+#todoapp input[type="text"] {
+    width: 100%;
+}
+
+#main {
+    display: none;
+}
+
+#todo-list {
+    margin: 30px 0;
+    padding: 0;
+    list-style: none;
+}
+
+#todo-list div.checkbox {
+    margin-bottom: 12px;
+}
+
+#todo-list > div:last-child {
+    border-bottom: none;
+}
+
+#todo-list > div.done label {
+    color: #777777;
+    text-decoration: line-through;
+}
+
+#todo-list .destroy {
+    position: absolute;
+    right: 5px;
+    top: 20px;
+    display: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: url(destroy.png) no-repeat;
+}
+
+#todo-list > div:hover .destroy {
+    display: block;
+}
+
+#todo-list .destroy:hover {
+    background-position: 0 -20px;
+}
+
+#todo-list > div.editing {
+    border-bottom: none;
+    margin-top: -1px;
+    padding: 0;
+}
+
+#todo-list > div.editing:last-child {
+    margin-bottom: -1px;
+}
+
+#todo-list > div.editing .edit {
+    display: block;
+    width: 444px;
+    padding: 13px 15px 14px 20px;
+    margin: 0;
+}
+
+#todo-list > div.editing .view {
+    display: none;
+}
+
+#todo-list > div .view label {
+    word-break: break-word;
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+    left: 8px;
+}
+
+#todo-list > div .edit {
+    display: none;
+}
+
+#footer a {
+    opacity: 1;
+    -webkit-transition: opacity 0.1s;
+    -moz-transition: opacity 0.1s;
+    -o-transition: opacity 0.1s;
+    -ms-transition: opacity 0.1s;
+}
+
+#footer {
+    overflow: hidden;
+    margin: 8px 0 10px 0;
+    min-height: 31px;
+    min-width: 1px;
+}
+
+#footer.hidden-btn a {
+    opacity: 0;
+}
+
+#clear-completed {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.todo-count {
+   display: inline-block;
+   padding: 2px 10px;
+   border-radius: 3px;
+   position: relative;
+   top: 1px; 
+}
+
+.todo-count span {
+   font-size: 16px; 
+   font-weight: 400;
+   position: relative;
+   top: -3px;
+   left: -3px;
+}
+
+#instructions {
+    margin: 10px auto;
+    color: #777777;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+    text-align: center;
+}
+
+#instructions a {
+    color: #336699;
+}
+
+#credits {
+    margin: 30px auto;
+    color: #999;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+    text-align: center;
+}
+
+#credits a {
+    color: #888;
+}
+
+#completed_container {
+    height: 64px;
+}

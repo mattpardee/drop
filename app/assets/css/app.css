@@ -1,0 +1,4 @@
+#app_container > div {
+    height: 100%;
+    overflow: auto;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Edmodo Devbox</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="assets/css/todos.css" />
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="top_navbar" class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Edmodo Devbox</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apps <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="dropdown-header">Recently used</li>
+              <li><a href="/apps/todos">Todos</a></li>
+              <li><a href="/apps/codepad">Codepad</a></li>
+              <li><a href="/apps/log-streamer">Log Streamer</a></li>
+              <li class="divider"></li>
+              <li role="presentation" class="dropdown-header">All apps</li>
+              <li><a href="/apps/cerebro">Cerebro</a></li>
+              <li><a href="/apps/codepad">Codepad</a></li>
+              <li><a href="/apps/log-streamer">Log Streamer</a></li>
+              <li><a href="/apps/todos">Todos</a></li>
+            </ul>
+          </li>
+          <li><a href="/store">Store</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, Matt <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/settings">Settings</a></li>
+              <li class="divider"></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+
+    <div id="app_container">
+      <!-- App HTML is injected here -->
+    </div>
+
+    <!-- Ideally we load these in using requirejs, but eh... -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/underscore.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/backbone.js"></script>
+    <script src="assets/js/backbone.localStorage.js"></script>
+    <script data-main="assets/js/client" src="assets/js/require.js"></script>
+  </body>
+</html>
+

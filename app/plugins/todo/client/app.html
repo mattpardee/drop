@@ -1,0 +1,46 @@
+<div id="todoapp_sidebar" class="col-md-2">
+</div>
+<div id="todoapp" class="col-md-10">
+    <div class="col-xs-12">
+      <header>
+        <h1 class="pull-left"><img class="icon" src="assets/images/awyeah.png" />Todos
+          <div class="todo-count"></div>
+        </h1>
+
+        <div id="completed_container" class="pull-right">
+            <div id="footer" class="hidden-btn">
+            </div>
+        </div>
+
+        <input id="new-todo" type="text" class="form-control" placeholder="Enter todo...">
+      </header>
+
+      <section id="main">
+        <!--input id="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label-->
+        <ul id="todo-list"></ul>
+      </section>
+    </div>
+</div>
+
+<!-- Templates -->
+<script type="text/template" id="item-template">
+  <div class="checkbox view">
+      <label>
+          <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+          <%- title %>
+      </label>
+      <a class="destroy"></a>
+  </div>
+  <input class="edit" type="text" value="<%- title %>" />
+</script>
+
+<script type="text/template" id="header-template">
+  <span>(<%= remaining %>)</span>
+</script>
+
+<script type="text/template" id="stats-template">
+  <% if (done) { %>
+    <a id="clear-completed" class="btn btn-success">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+  <% } %>
+</script>

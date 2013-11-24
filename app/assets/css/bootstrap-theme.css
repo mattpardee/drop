@@ -1,0 +1,88 @@
+.navbar {
+    border-radius: 0px;
+    min-height: 40px;
+    margin-bottom: 0px;
+}
+
+.navbar-brand {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 0.7px;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    background-color: #333;
+    color: #eee;
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 0 0 2px 2px;
+}
+
+.dropdown-menu .divider {
+    margin: 9px 0 6px 0;
+}
+
+.dropdown-header {
+    padding: 6px 20px 3px 20px;
+}
+
+.navbar-default .navbar-nav>.dropdown>a .caret, .navbar-default .navbar-nav>.dropdown>a:hover .caret, .navbar-default .navbar-nav>.dropdown>a:focus .caret{
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.navbar-default .navbar-nav>.open>a caret, .navbar-default .navbar-nav>.open>a:hover .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+
+.navbar-nav>li>a, .navbar-brand {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-default {
+    background: #234f8b;
+    background: -moz-linear-gradient(top,  #234f8b 0%, #1f487e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#234f8b), color-stop(100%,#1f487e));
+    background: -webkit-linear-gradient(top,  #234f8b 0%,#1f487e 100%);
+    background: -o-linear-gradient(top,  #234f8b 0%,#1f487e 100%);
+    background: -ms-linear-gradient(top,  #234f8b 0%,#1f487e 100%);
+    background: linear-gradient(to bottom,  #234f8b 0%,#1f487e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#234f8b', endColorstr='#1f487e',GradientType=0 );
+    font-size: 13px;
+    border: none;
+}
+
+.navbar-form .form-control {
+    height: 23px;
+    font-size: 13px;
+    border: none;
+}
+
+.navbar-form .form-control[type="text"] {
+    -webkit-transition: width 0.12s ease-in-out, background 0.2s, color 0.2s;
+    -moz-transition: width: 0.12s ease-in-out, background 0.2s, color 0.2s;
+    -o-transition: width 0.12s ease-in-out, background 0.2s, color 0.2s;
+    -ms-transition: width 0.12s ease-in-out, background 0.2s, color 0.2s;
+    width: 110px;
+    background: #0e213a;
+}
+
+.navbar-form .form-control[type="text"]:focus {
+    width: 155px;
+    background: #122847;
+    color: #bbb;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
