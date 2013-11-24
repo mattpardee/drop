@@ -1,16 +1,17 @@
 define(function(require, exports, module) { 
 
-    var html = require("text!todo/client/app.html");
+    var html = require("text!todos/client/todos.html");
+    var css = require("text!todos/client/todos.css");
 
     module.exports = {
         /**
          * Called before init so we can load HTML into the container
          * or do other tasks before we fully initialize the plugin
          *
-         * @param function cb Callback to call with our HTML
+         * @param function cb Callback to call with our CSS & HTML
          */
         preInit : function(cb) {
-            cb(html);
+            cb(css, html);
         },
 
         init : function() {

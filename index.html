@@ -4,11 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>Edmodo Devbox</title>
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/bootstrap-theme.css" />
-  <link rel="stylesheet" href="assets/css/todos.css" />
-  <link rel="stylesheet" href="assets/css/app.css" />
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -21,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Edmodo Devbox</a>
+        <a class="navbar-brand" href="/">Edmodo Devbox</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,13 +67,29 @@
       <!-- App HTML is injected here -->
     </div>
 
-    <!-- Ideally we load these in using requirejs, but eh... -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/underscore.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/backbone.js"></script>
-    <script src="assets/js/backbone.localStorage.js"></script>
-    <script data-main="assets/js/client" src="assets/js/require.js"></script>
+    <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="error-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Ideally we load these using requirejs, but eh... -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/underscore.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/backbone.js"></script>
+    <script src="/assets/js/backbone.localStorage.js"></script>
+    <script data-main="/assets/js/client" src="/assets/js/require.js"></script>
   </body>
 </html>
 
