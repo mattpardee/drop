@@ -2,7 +2,7 @@
 
 Drop is a platform that runs small "plugin" applications. It can be used for
 internal tooling or as a simple collection of JS-powered applications (JS on 
-the client and Node.js on the server)
+the client and Node.js on the server).
 
 To install:
 

@@ -64,4 +64,31 @@ define(function(require, exports, module) {
     else {
         // Load up the dashboard view
     }
+
+    function ConnectionHandler(host) {
+        this.host = host;
+    }
+
+    ConnectionHandler.prototype.connect = function() {
+        this.ws = new WebSocket(this.host);
+        this.ws.onopen = function() {
+            console.log("connected");
+        };
+
+        this.ws.onmessage = function (evt) {
+            console.log(evt);
+        };
+
+        this.ws.onclose = function() {
+            console.log("disconnected");
+        };
+    };
+
+    ConnectionHandler.prototype.sendMessage = function(msg) {
+        msg = (typeof msg === 'object' ? JSON.stringify(msg) : msg);
+        this.ws.send(msg);
+    };
+
+    var ch = new ConnectionHandler('ws://' + location.hostname + ':1530');
+    ch.connect();
 });

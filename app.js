@@ -3,10 +3,12 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var architect = require("architect");
-var http = require('http');
-var path = require('path');
+var express = require('express'),
+    architect = require("architect"),
+    http = require('http'),
+    path = require('path'),
+    WebSocketServer = require('ws').Server
+    wss = new WebSocketServer({port: 1530});
 
 var app = express();
 
@@ -50,3 +52,60 @@ architect.createApp(config, function (err, app) {
     if (err) throw err;
     console.log("Plugin system ready");
 });
+
+
+/**
+ * Websocket handling
+ *
+ */
+
+var sessions = {};
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+           .toString(16)
+           .substring(1);
+}
+
+function generateGuid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+wss.on('connection', function(ws) {
+    function helper (ws) {
+        var session = new Session(ws),
+            guid = generateGuid();
+        sessions[guid] = session;
+        ws.on('close', function() {
+            delete sessions[guid];
+            delete session;
+        });
+    }
+
+    console.log("New connection");
+    helper(ws);
+});
+
+function Session(ws) {
+    this.ws = ws;
+
+    ws.send(JSON.stringify({
+        'cmd' : 'handshake'
+    }));
+
+    ws.on('message', function(message) {
+        try {
+            message = JSON.parse(message);
+        }
+        catch (e) {
+            console.log(e);
+            return;
+        }
+
+        switch (message.cmd) {
+            default:
+                break;
+        }
+    });
+}
