@@ -12,3 +12,11 @@ $ node app
 ```
 
 The app should be running on http://localhost:4000
+
+## Creating a plugin
+
+_(note that right now only cient-side plugins are supported)_
+
+```
+# Look at how /app/plugins/todos does it. Then duplicate that folder and remove all of it.
+```
