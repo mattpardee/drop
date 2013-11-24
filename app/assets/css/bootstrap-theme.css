@@ -86,3 +86,7 @@
     box-shadow: none;
     -webkit-box-shadow: none;
 }
+
+.modal-content {
+    border-radius: 2px;
+}
