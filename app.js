@@ -1,6 +1,7 @@
 var express = require('express'),
     architect = require("architect"),
     http = require('http'),
+    fs = require('fs'),
     path = require('path'),
     exphbs = require('express3-handlebars'),
     WebSocketServer = require('ws').Server,
@@ -24,12 +25,41 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Assemble all the apps in our plugins directory
+var apps = {
+    apps : []
+};
+
+var pluginBase = path.join('./app/plugins'),
+    files = fs.readdirSync(pluginBase),
+    packageInfo;
+
+for (var f in files) {
+    if (files[f].indexOf('.') === -1) {
+        packageInfo = fs.readFileSync(path.join(pluginBase, files[f], '/package.json'));
+        try {
+            packageInfo = JSON.parse(packageInfo.toString());
+        }
+        catch (e) {
+            console.log("ERR: Could not parse client plugin's package.json file for:\n\t", files[f]);
+            continue;
+        }
+
+        //console.log(packageInfo);
+        apps.apps.push({
+            link : files[f],
+            name : packageInfo.name
+        });
+    }
+}
+
+// Set up routes
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', apps);
 });
 
 app.get('/apps/:appname', function(req, res) {
-    res.render('index');
+    res.render('index', apps);
 });
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -16,7 +16,7 @@ define(function(require, exports, module) {
         },
 
         init : function() {
-            console.log();
+            console.log("Template inited");
         },
 
         onmessage : function() {
