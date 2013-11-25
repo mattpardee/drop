@@ -1,9 +1,14 @@
 /**
  * Devbox entry point
+ *
+ * Does some configuration and then loads Drop core.
  */
 
 requirejs.config({
-    baseUrl: '/plugins'
+    baseUrl: '/plugins',
+    paths : {
+        core: '../core'
+    }
 });
 
 requirejs.onError = function (err) {
@@ -16,79 +21,10 @@ requirejs.onError = function (err) {
 
     $('#error-modal .modal-header h4').text('Loading Error');
     $('#error-modal .modal-body').html(errorMsg);
-
     $('#error-modal').modal('show');
 
 };
 
 define(function(require, exports, module) {
-    var app_container = document.getElementById("app_container"),
-        top_bar = document.getElementById("top_navbar"),
-        topBarHeight = top_bar.getBoundingClientRect().height;
-
-    function resize() {
-        app_container.style.height = window.innerHeight - topBarHeight + "px";
-    }
-
-    window.addEventListener('resize', function() {
-        resize();
-    });
-
-    resize();
-
-    // Set up JS functionality
-    $('.dropdown-toggle').dropdown();
-
-    // To test, let's load a plugin
-    var path = location.pathname.split("/");
-
-    if (path.length > 2 && path[1] === 'apps') {
-        var appName = path[2];
-        require(['/plugins/' + appName + '/client/app.js'], function(plugin) {
-            if (typeof plugin.preInit === 'function') {
-                plugin.preInit(function(css, html) {
-                    app_container.innerHTML = [
-                        '<style type="text/css">',
-                        css,
-                        '</style>',
-                        html].join('\n');
-
-                    plugin.init();
-                });
-            }
-            else {
-                plugin.init();
-            }
-        });
-    }
-    else {
-        // Load up the dashboard view
-    }
-
-    function ConnectionHandler(host) {
-        this.host = host;
-    }
-
-    ConnectionHandler.prototype.connect = function() {
-        this.ws = new WebSocket(this.host);
-        this.ws.onopen = function() {
-            console.log("connected");
-        };
-
-        this.ws.onmessage = function (evt) {
-            console.log(evt);
-        };
-
-        this.ws.onclose = function() {
-            console.log("disconnected");
-        };
-    };
-
-    ConnectionHandler.prototype.sendMessage = function(msg) {
-        msg = (typeof msg === 'object' ? JSON.stringify(msg) : msg);
-        this.ws.send(msg);
-    };
-
-    var ch = new ConnectionHandler('ws://' + location.hostname + ':1530');
-    ch.connect();
+    require('core/main');
 });
