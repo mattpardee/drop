@@ -1,5 +1,4 @@
 define(function(require, exports, module) {
-    console.log("Requirin'");
     var app_container = document.getElementById("app_container"),
         top_bar = document.getElementById("top_navbar"),
         topBarHeight = top_bar.getBoundingClientRect().height,

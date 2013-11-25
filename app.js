@@ -1,22 +1,17 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express'),
     architect = require("architect"),
     http = require('http'),
     path = require('path'),
-    WebSocketServer = require('ws').Server
+    exphbs = require('express3-handlebars'),
+    WebSocketServer = require('ws').Server,
     wss = new WebSocketServer({port: 1530});
 
 var app = express();
 
-// all environments
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname);
-app.set('view engine', 'jade');
-app.engine('html', require('ejs').renderFile);
+app.engine('hbs', exphbs());
+app.set('view engine', 'hbs');
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -30,11 +25,11 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res) {
-    res.render('index.html');
+    res.render('index');
 });
 
 app.get('/apps/:appname', function(req, res) {
-    res.render('index.html');
+    res.render('index');
 });
 
 http.createServer(app).listen(app.get('port'), function(){
