@@ -10,14 +10,16 @@ define(function(require, exports, module) {
          *
          * @param function cb Callback to call with our CSS & HTML
          */
-        preInit : function(cb) {
+        preInit : function(s, cb) {
+            this.socket = s;
             cb(css, html);
         },
 
         init : function() {
+
         },
 
-        onmessage : function() {
+        onmessage : function(msg) {
 
         },
 

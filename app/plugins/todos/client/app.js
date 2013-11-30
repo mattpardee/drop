@@ -1,24 +1,27 @@
 define(function(require, exports, module) { 
 
-    var html = require("text!todos/client/todos.html");
-    var css = require("text!todos/client/todos.css");
+    var html = require("text!todos/client/todos.html"),
+        css  = require("text!todos/client/todos.css"),
+        socket;
 
     module.exports = {
         /**
          * Called before init so we can load HTML into the container
          * or do other tasks before we fully initialize the plugin
          *
+         * @param object s WebSocket connection to the server
          * @param function cb Callback to call with our CSS & HTML
          */
-        preInit : function(cb) {
+        preInit : function(s, cb) {
+            socket = s;
             cb(css, html);
         },
 
         init : function() {
-            createTodo();
+            createTodoApp();
         },
 
-        onmessage : function() {
+        onmessage : function(msg) {
 
         },
 
@@ -27,9 +30,7 @@ define(function(require, exports, module) {
         }
     };
 
-    function createTodo() {
-      // Todo Model
-      // ----------
+    function createTodoApp() {
 
       // Our basic **Todo** model has `title`, `order`, and `done` attributes.
       var Todo = Backbone.Model.extend({
@@ -48,6 +49,16 @@ define(function(require, exports, module) {
           if (!this.get("title")) {
             this.set({"title": this.defaults().title});
           }
+
+          $('#todo-list').sortable({
+            axis: 'y',
+
+            stop: function(e, ui) {
+              console.log(e, ui);
+
+              socket.send({ data: "rearranged" });
+            }
+          });
         },
 
         // Toggle the `done` state of this todo item.
@@ -57,14 +68,10 @@ define(function(require, exports, module) {
 
       });
 
-      // Todo Collection
-      // ---------------
-
       // The collection of todos is backed by *localStorage* instead of a remote
       // server.
       var TodoList = Backbone.Collection.extend({
 
-        // Reference to this collection's model.
         model: Todo,
 
         // Save all of the todo items under the `"todos-backbone"` namespace.
@@ -96,9 +103,6 @@ define(function(require, exports, module) {
 
       // Create our global collection of **Todos**.
       var Todos = new TodoList;
-
-      // Todo Item View
-      // --------------
 
       // The DOM element for a todo item...
       var TodoView = Backbone.View.extend({
@@ -186,8 +190,7 @@ define(function(require, exports, module) {
         // Delegated events for creating new items, and clearing completed ones.
         events: {
           "keypress #new-todo":  "createOnEnter",
-          "click #clear-completed": "clearCompleted",
-          "click #toggle-all": "toggleAllComplete"
+          "click #clear-completed": "clearCompleted"
         },
 
         // At initialization we bind to the relevant events on the `Todos`
@@ -198,8 +201,6 @@ define(function(require, exports, module) {
           this.input = this.$("#new-todo");
 
           this.input.focus();
-
-          //this.allCheckbox = this.$("#toggle-all")[0];
 
           this.listenTo(Todos, 'add', this.addOne);
           this.listenTo(Todos, 'reset', this.addAll);
@@ -236,8 +237,6 @@ define(function(require, exports, module) {
           else {
             this.footer.addClass('hidden-btn');
           }
-
-          //this.allCheckbox.checked = !remaining;
         },
 
         // Add a single todo item to the list by creating a view for it, and
@@ -252,8 +251,7 @@ define(function(require, exports, module) {
           Todos.each(this.addOne, this);
         },
 
-        // If you hit return in the main input field, create new **Todo** model,
-        // persisting it to *localStorage*.
+        // If you hit return in the main input field, create new **Todo** model
         createOnEnter: function(e) {
           if (e.keyCode != 13) return;
           if (!this.input.val()) return;
@@ -266,13 +264,7 @@ define(function(require, exports, module) {
         clearCompleted: function() {
           _.invoke(Todos.done(), 'destroy');
           return false;
-        },
-
-        toggleAllComplete: function () {
-          /*var done = this.allCheckbox.checked;
-          Todos.each(function (todo) { todo.save({'done': done}); });*/
         }
-
       });
 
       // Finally, we kick things off by creating the **App**.

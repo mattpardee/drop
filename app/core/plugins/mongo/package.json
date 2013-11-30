@@ -1,0 +1,9 @@
+{
+    "name": "mongo",
+    "version": "0.0.1",
+    "main": "mongo.js",
+    "private": true,
+    "plugin": {
+        "provides": ["mongo"]
+    }
+}

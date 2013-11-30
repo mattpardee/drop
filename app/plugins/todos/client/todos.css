@@ -49,12 +49,11 @@ header > h1 > .icon {
     list-style: none;
 }
 
-#todo-list div.checkbox {
-    margin-bottom: 12px;
+#todo-list > div {
+    margin: 10px 0 12px;
 }
-
-#todo-list > div:last-child {
-    border-bottom: none;
+#todo-list div.checkbox {
+    margin-bottom: 0;
 }
 
 #todo-list > div.done label {

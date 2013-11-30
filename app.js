@@ -3,9 +3,7 @@ var express = require('express'),
     http = require('http'),
     fs = require('fs'),
     path = require('path'),
-    exphbs = require('express3-handlebars'),
-    WebSocketServer = require('ws').Server,
-    wss = new WebSocketServer({port: 1530});
+    exphbs = require('express3-handlebars');
 
 var app = express();
 
@@ -36,12 +34,12 @@ var pluginBase = path.join('./app/plugins'),
 
 for (var f in files) {
     if (files[f].indexOf('.') === -1) {
-        packageInfo = fs.readFileSync(path.join(pluginBase, files[f], '/package.json'));
+        packageInfo = fs.readFileSync(path.join(pluginBase, files[f], '/server/package.json'));
         try {
             packageInfo = JSON.parse(packageInfo.toString());
         }
         catch (e) {
-            console.log("ERR: Could not parse client plugin's package.json file for:\n\t", files[f]);
+            console.log("ERR: Could not parse plugin's package.json file for:\n\t", files[f]);
             continue;
         }
 
@@ -70,67 +68,10 @@ http.createServer(app).listen(app.get('port'), function(){
  * Architect config
  *
  */
-var configPath = path.join(__dirname, "config.js");
-var config = architect.loadConfig(configPath);
+var configPath = path.join(__dirname, "config.js"),
+    config = architect.loadConfig(configPath);
 
 architect.createApp(config, function (err, app) {
     if (err) throw err;
     console.log("Plugin system ready");
 });
-
-
-/**
- * Websocket handling
- *
- */
-
-var sessions = {};
-
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-           .toString(16)
-           .substring(1);
-}
-
-function generateGuid() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-}
-
-wss.on('connection', function(ws) {
-    function helper (ws) {
-        var session = new Session(ws),
-            guid = generateGuid();
-        sessions[guid] = session;
-        ws.on('close', function() {
-            delete sessions[guid];
-            delete session;
-        });
-    }
-
-    console.log("New connection");
-    helper(ws);
-});
-
-function Session(ws) {
-    this.ws = ws;
-
-    ws.send(JSON.stringify({
-        'cmd' : 'handshake'
-    }));
-
-    ws.on('message', function(message) {
-        try {
-            message = JSON.parse(message);
-        }
-        catch (e) {
-            console.log(e);
-            return;
-        }
-
-        switch (message.cmd) {
-            default:
-                break;
-        }
-    });
-}
