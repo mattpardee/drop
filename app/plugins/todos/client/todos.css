@@ -27,11 +27,91 @@ header > h1 > .icon {
 }
 
 #todoapp_sidebar {
+    padding: 25px 0 0;
     border-right: 1px solid #dde5e9;
+}
+#todoapp_sidebar .section {
+    margin: 20px 0 0;
+}
+#todoapp_sidebar .section h2 {
+    font-family: Helvetica Neue;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #777;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+#tags_nav {
+    padding: 0;
+}
+
+#tags_nav h2 {
+    margin-left: 20px;
+}
+#todoapp_sidebar .tags {
+
+}
+.tag {
+    font-size: 13px;
+    line-height: 13px;
+    padding: 3px 20px 5px 20px;
+    cursor: pointer;
+}
+.tag:hover {
+    background-color: #eee;
+}
+.tag.active {
+    background-color: #6cb1e3;
+    color: #fff;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+}
+.tag.active span {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.18);
+    border-color: #fff;
+}
+.tag span {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 15px;
+    margin: 0 8px 0 10px;
+}
+
+.tag .red, .tag.red {
+    background: #fd7d7f;
+    border: 1px solid #d05153;
+}
+.tag .orange, .tag.orange {
+    background: #fdbd43;
+    border: 1px solid #e99023;
+}
+.tag .yellow, .tag.yellow {
+    background: #f4e447;
+    border: 1px solid #d1c229;
+}
+.tag .green, .tag.green {
+    background: #b5df3a;
+    border: 1px solid #a0b84e;
+}
+.tag .blue, .tag.blue {
+    background: #83c9fd;
+    border: 1px solid #669bb8;
+}
+.tag .purple, .tag.purple {
+    background: #e3a7fd;
+    border: 1px solid #d56afc;
+}
+.tag .gray, .tag.gray {
+    background: #c8c8c8;
+    border: 1px solid #a0a0a0;
 }
 
 #todoapp {
-    padding: 50px 65px;
+    padding: 35px 45px 40px 40px;
     background: #fff;
 }
 
@@ -50,17 +130,49 @@ header > h1 > .icon {
 }
 
 #todo-list > div {
-    margin: 10px 0 12px;
+    margin: 10px 0 10px -14px;
+    padding-left: 12px;
+    cursor: -webkit-grab;
+    cursor: grab;
+    border-left: 2px solid #fff;
+    padding-bottom: 2px;
+    -webkit-transition: padding 0.2s ease-in-out;
+}
+
+#todo-list > div.ui-state-hover {
+    padding-bottom: 20px;
+}
+
+#todo-list > div:hover {
+    border-left-color: #83c9fd;
+}
+#todo-list > div:active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
 }
 #todo-list div.checkbox {
     margin-bottom: 0;
 }
 
 #todo-list > div.done label {
-    color: #777777;
-    text-decoration: line-through;
+    color: #aaa;
+}
+#todo-list > div.done .tags {
+    opacity: 0.5;
 }
 
+#todo-list .tags {
+    margin: 0 0 0 27px;
+}
+#todo-list .tag {
+    display: inline-block;
+    padding: 0px 7px 1px 7px;
+    border-radius: 16px;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+    margin: 7px 6px 0 0;
+}
 #todo-list .destroy {
     position: absolute;
     right: 5px;
@@ -113,25 +225,6 @@ header > h1 > .icon {
     display: none;
 }
 
-#footer a {
-    opacity: 1;
-    -webkit-transition: opacity 0.1s;
-    -moz-transition: opacity 0.1s;
-    -o-transition: opacity 0.1s;
-    -ms-transition: opacity 0.1s;
-}
-
-#footer {
-    overflow: hidden;
-    margin: 8px 0 10px 0;
-    min-height: 31px;
-    min-width: 1px;
-}
-
-#footer.hidden-btn a {
-    opacity: 0;
-}
-
 #clear-completed {
     font-size: 12px;
     margin-left: 5px;
@@ -153,28 +246,26 @@ header > h1 > .icon {
    left: -3px;
 }
 
-#instructions {
-    margin: 10px auto;
-    color: #777777;
-    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-    text-align: center;
-}
-
-#instructions a {
-    color: #336699;
-}
-
-#credits {
-    margin: 30px auto;
-    color: #999;
-    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-    text-align: center;
-}
-
-#credits a {
-    color: #888;
-}
-
 #completed_container {
     height: 64px;
+}
+
+
+#footer a {
+    opacity: 1;
+    -webkit-transition: opacity 0.1s;
+    -moz-transition: opacity 0.1s;
+    -o-transition: opacity 0.1s;
+    -ms-transition: opacity 0.1s;
+}
+
+#footer {
+    overflow: hidden;
+    margin: 8px 0 10px 0;
+    min-height: 31px;
+    min-width: 1px;
+}
+
+#footer.hidden-btn a {
+    opacity: 0;
 }

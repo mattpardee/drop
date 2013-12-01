@@ -19,6 +19,20 @@ define(function(require, exports, module) {
 
         init : function() {
             createTodoApp();
+
+            $('#todo-list > div').droppable({
+              activeClass: "ui-state-default",
+              hoverClass: "ui-state-hover",
+              accept: ":not(.ui-sortable-helper)",
+              drop: function( event, ui ) {
+                $(this).find('.placeholder').remove();
+                var span = ui.draggable.find('span');
+                $('<div class="tag"></div>')
+                  .addClass(span.attr('class'))
+                  .text(ui.draggable.text())
+                  .appendTo($(this).find('.tags'));
+              }
+            });
         },
 
         onmessage : function(msg) {
@@ -59,6 +73,28 @@ define(function(require, exports, module) {
               socket.send({ data: "rearranged" });
             }
           });
+
+          $('#todo-list > div').each(function(e, i) {
+            console.log(e, i);
+          });
+
+          $('#todoapp_sidebar .tag')
+            .draggable({
+              helper: 'clone',
+              appendTo: 'body',
+              revert: 'invalid',
+              revertDuration: 300
+            })
+            .click(function() {
+              if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                return;
+              }
+
+              $('#todoapp_sidebar .tag.active').removeClass('active');
+              $(this).addClass('active');
+            }
+          );
         },
 
         // Toggle the `done` state of this todo item.

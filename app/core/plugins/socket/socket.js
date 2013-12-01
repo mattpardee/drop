@@ -14,14 +14,11 @@ module.exports = function setup(options, imports, register) {
    */
 
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-           .toString(16)
-           .substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   }
 
   function generateGuid() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
 
   var sessions = {};
@@ -33,6 +30,7 @@ module.exports = function setup(options, imports, register) {
     function helper (ws) {
         var session = new Session(ws),
             guid = generateGuid();
+
         sessions[guid] = session;
         ws.on('close', function() {
             delete sessions[guid];
@@ -40,7 +38,6 @@ module.exports = function setup(options, imports, register) {
         });
     }
 
-    console.log("New connection");
     helper(ws);
   });
 
@@ -56,16 +53,14 @@ module.exports = function setup(options, imports, register) {
             message = JSON.parse(message);
         }
         catch (e) {
-            console.log(e);
+            console.log("^^^ Message parse error", e);
             return;
         }
 
-        console.log(message);
+        //console.log(message);
 
         // Pass the message off to one of the registered plugins
-        if (message.route && interfaces[message.route]) {
-          interfaces[message.route](message);
-        }
+        message.route && interfaces[message.route] && interfaces[message.route](message);
     });
   }
 

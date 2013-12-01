@@ -43,7 +43,6 @@ for (var f in files) {
             continue;
         }
 
-        //console.log(packageInfo);
         apps.apps.push({
             link : files[f],
             name : packageInfo.name
