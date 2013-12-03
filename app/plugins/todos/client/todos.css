@@ -136,7 +136,7 @@ header > h1 > .icon {
     cursor: grab;
     border-left: 2px solid #fff;
     padding-bottom: 2px;
-    -webkit-transition: padding 0.2s ease-in-out;
+    -webkit-transition: padding 0.15s ease-in-out;
 }
 
 #todo-list > div.ui-state-hover {

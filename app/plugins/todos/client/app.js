@@ -33,6 +33,24 @@ define(function(require, exports, module) {
                   .appendTo($(this).find('.tags'));
               }
             });
+
+            $('#todoapp_sidebar .tag')
+              .draggable({
+                helper: 'clone',
+                appendTo: 'body',
+                revert: 'invalid',
+                revertDuration: 300
+              })
+              .click(function() {
+                if ($(this).hasClass('active')) {
+                  $(this).removeClass('active');
+                  return;
+                }
+
+                $('#todoapp_sidebar .tag.active').removeClass('active');
+                $(this).addClass('active');
+              }
+            );
         },
 
         onmessage : function(msg) {
@@ -77,24 +95,6 @@ define(function(require, exports, module) {
           $('#todo-list > div').each(function(e, i) {
             console.log(e, i);
           });
-
-          $('#todoapp_sidebar .tag')
-            .draggable({
-              helper: 'clone',
-              appendTo: 'body',
-              revert: 'invalid',
-              revertDuration: 300
-            })
-            .click(function() {
-              if ($(this).hasClass('active')) {
-                $(this).removeClass('active');
-                return;
-              }
-
-              $('#todoapp_sidebar .tag.active').removeClass('active');
-              $(this).addClass('active');
-            }
-          );
         },
 
         // Toggle the `done` state of this todo item.
